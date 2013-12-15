@@ -71,7 +71,7 @@
                    SERIAL PORT ASSIGNMENTS
            
   Serial        Bootloader/Debug monitor (USB Built in)
-  Serial1       CMRI Port (RS-485) RX(D0) and TX(D1) pins
+  Serial       CMRI Port (RS-485) RX(D0) and TX(D1) pins
   
 /**************************************************************/
 /**********        CMRI Protocol Message Format      **********/
@@ -123,8 +123,8 @@ boolean debugMode  = false,                     //
 //#define BASE_NODE
 //#define BASE_NODE_8IN8OUT
 //#define BASE_NODE_16IN
-//#define BASE_NODE_16OUT
-#define BASE_NODE_RSMC
+#define BASE_NODE_16OUT
+//#define BASE_NODE_RSMC
 //#define BASE_NODE_SERVO
 
 //----------------------
@@ -845,8 +845,8 @@ void Flush_CMRI_To_ETX()
 {
   do
   {
-   if (Serial1.available())
-    c = Serial1.read();
+   if (Serial.available())
+    c = Serial.read();
   } while (c != ETX); 
   
 }  // FLUSH CMRI TO ETX
@@ -860,8 +860,8 @@ char Read_CMRI_Byte()
 {
   while (true)
   { 
-    if (Serial1.available() > 0)
-     return char(Serial1.read());
+    if (Serial.available() > 0)
+     return char(Serial.read());
   };
 }  // READ CMRI BYTE
 
@@ -895,7 +895,7 @@ int CMRI_Read()
 //-----------------------------------
 // Check input buffer for a character
 //-----------------------------------
-  if (Serial1.available() <= 0)
+  if (Serial.available() <= 0)
    return respNone;
   
 //--------------------
@@ -945,7 +945,7 @@ int CMRI_Read()
          break;
          case 'T':          // Write (Transmit)
            resp = respTransmit;
-//           if (debugMode) { Serial.print(":"); i=Serial1.available(); Serial.print(i,HEX); }
+//           if (debugMode) { Serial.print(":"); i=Serial.available(); Serial.print(i,HEX); }
          break;
          default:           // Unknown - Error
            resp = respErr;
@@ -1083,7 +1083,7 @@ void CMRI_Poll_Resp()
 //-----------------------------------------
   CMRI_Buf[i++] = ETX;
   for (j=0; j<i; j++)
-   Serial1.write(CMRI_Buf[j]);
+   Serial.write(CMRI_Buf[j]);
 /*
   if (debugMode)
    {
@@ -1267,8 +1267,8 @@ void setup()
    
 // Open the CMRInet port
 //----------------------
-  Serial1.begin(CMRINET_SPEED); 
-  while(!Serial1);
+  Serial.begin(CMRINET_SPEED); 
+  while(!Serial);
   delay(100);
   
 // Call the default initialization routine
