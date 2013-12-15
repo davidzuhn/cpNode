@@ -3,12 +3,15 @@ cpNode
 
 Use Arduino platforms for CMRI interface input/output controls.
 
-This software developed by Chuck Catania and Seth Neumann, for use
+This software originally developed by Chuck Catania and Seth Neumann, for use
 with bare Arduino boards and the cpNode I2C based I/O extenders.
 
 Discussions about this software or the cpNode boards takes place on
 the Arduini Yahoogroup.  More details on group membership is at
 http://groups.yahoo.com/neo/groups/Arduini/info
+
+
+This code is modified by david zuhn, for his own various and sundry purposes.
 
 
 
